@@ -24,7 +24,7 @@
         const carta = data.find(c => c.id == id);
         const detalle = document.getElementById('detalle');
         detalle.innerHTML = `
-          <img src="img/${carta.imagen}" alt="${carta.nombre}">
+          <img src="${carta.imagen}" alt="${carta.nombre}">
           <h2>${carta.nombre}</h2>
           <p>${carta.set} - ${carta.numero}</p>
           <p>Estado: ${carta.estado}</p>
