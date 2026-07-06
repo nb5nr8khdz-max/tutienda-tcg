@@ -15,21 +15,52 @@
   <section id="detalle"></section>
 
   <script>
+    // Leer parámetro id de la URL
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
 
+    // Si no hay id, mostrar mensaje
+    if (!id) {
+      document.getElementById('detalle').innerHTML = `
+        <p>No se recibió ningún ID de carta.</p>
+      `;
+      return;
+    }
+
+    // Cargar inventario
     fetch('inventario.json')
       .then(response => response.json())
       .then(data => {
-        const carta = data.find(c => c.id == id);
+
+        // Buscar la carta (comparación segura)
+        const carta = data.find(c => String(c.id) === String(id));
+
         const detalle = document.getElementById('detalle');
+
+        if (!carta) {
+          detalle.innerHTML = `
+            <p>No se encontró la carta con ID ${id}.</p>
+          `;
+          return;
+        }
+
+        // Mostrar la carta
         detalle.innerHTML = `
           <img src="${carta.imagen}" alt="${carta.nombre}">
           <h2>${carta.nombre}</h2>
           <p>${carta.set} - ${carta.numero}</p>
           <p>Estado: ${carta.estado}</p>
           <p>Precio: ${carta.precio}</p>
-          <p class="nota">La carta se muestra tal como está. El cliente evalúa centrado y condición visual antes de decidir si enviarla a gradear.</p>
+          <p class="nota">
+            La carta se muestra tal como está. El cliente evalúa centrado y condición visual
+            antes de decidir si enviarla a gradear.
+          </p>
+        `;
+      })
+      .catch(error => {
+        console.error('Error cargando inventario.json:', error);
+        document.getElementById('detalle').innerHTML = `
+          <p>Hubo un problema al cargar el inventario.</p>
         `;
       });
   </script>
