@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventario TCG</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Inventario TCG</h1>
+    <a href="index.html" class="btn">Inicio</a>
+  </header>
+
+  <section id="catalogo"></section>
+
+  <script>
+    fetch('inventario.json')
+      .then(response => response.json())
+      .then(data => {
+        const catalogo = document.getElementById('catalogo');
+        data.forEach(carta => {
+          const item = document.createElement('div');
+          item.className = 'carta';
+          item.innerHTML = `
+            <img src="img/${carta.imagen}" alt="${carta.nombre}">
+            <h2>${carta.nombre}</h2>
+            <p>${carta.set} - ${carta.numero}</p>
+            <p>Estado: ${carta.estado}</p>
+            <p>Precio: ${carta.precio}</p>
+            <a href="carta.html?id=${carta.id}" class="btn">Ver carta</a>
+          `;
+          catalogo.appendChild(item);
+        });
+      });
+  </script>
+</body>
+</html>
