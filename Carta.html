@@ -15,24 +15,14 @@
   <section id="detalle"></section>
 
   <script>
-    // Leer parámetro id de la URL
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
 
-    // Si no hay id, mostrar mensaje
-    if (!id) {
-      document.getElementById('detalle').innerHTML = `
-        <p>No se recibió ningún ID de carta.</p>
-      `;
-      return;
-    }
-
-    // Cargar inventario
     fetch('inventario.json')
       .then(response => response.json())
       .then(data => {
 
-        // Buscar la carta (comparación segura)
+        // Comparación segura: convierte ambos a texto
         const carta = data.find(c => String(c.id) === String(id));
 
         const detalle = document.getElementById('detalle');
@@ -44,7 +34,6 @@
           return;
         }
 
-        // Mostrar la carta
         detalle.innerHTML = `
           <img src="${carta.imagen}" alt="${carta.nombre}">
           <h2>${carta.nombre}</h2>
@@ -58,11 +47,11 @@
         `;
       })
       .catch(error => {
-        console.error('Error cargando inventario.json:', error);
         document.getElementById('detalle').innerHTML = `
-          <p>Hubo un problema al cargar el inventario.</p>
+          <p>Error cargando inventario.json</p>
         `;
       });
   </script>
 </body>
 </html>
+
