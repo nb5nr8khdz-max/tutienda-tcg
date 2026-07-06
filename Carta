@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carta TCG</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Detalle de carta</h1>
+    <a href="catalogo.html" class="btn">Volver al catálogo</a>
+  </header>
+
+  <section id="detalle"></section>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+
+    fetch('inventario.json')
+      .then(response => response.json())
+      .then(data => {
+        const carta = data.find(c => c.id == id);
+        const detalle = document.getElementById('detalle');
+        detalle.innerHTML = `
+          <img src="img/${carta.imagen}" alt="${carta.nombre}">
+          <h2>${carta.nombre}</h2>
+          <p>${carta.set} - ${carta.numero}</p>
+          <p>Estado: ${carta.estado}</p>
+          <p>Precio: ${carta.precio}</p>
+          <p class="nota">La carta se muestra tal como está. El cliente evalúa centrado y condición visual antes de decidir si enviarla a gradear.</p>
+        `;
+      });
+  </script>
+</body>
+</html>
