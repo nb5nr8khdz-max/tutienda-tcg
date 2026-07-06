@@ -22,7 +22,7 @@
       .then(response => response.json())
       .then(data => {
 
-        // Comparación segura: convierte ambos a texto
+        // Comparación segura
         const carta = data.find(c => String(c.id) === String(id));
 
         const detalle = document.getElementById('detalle');
