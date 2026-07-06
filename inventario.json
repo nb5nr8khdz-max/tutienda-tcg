@@ -1,10 +1,12 @@
-{
-  "id": 1,
-  "nombre": "Hitmonchan",
-  "set": "Rebel Clash",
-  "numero": "095/202",
-  "estado": "Near Mint",
-  "precio": "€2.50",
-  "imagen": "IMG/IMG_3580.jpg",
-  "reverso": "IMG/IMG_3593.jpg"
-}
+[
+  {
+    "id": 1,
+    "nombre": "Hitmonchan",
+    "set": "Rebel Clash",
+    "numero": "095/202",
+    "estado": "Near Mint",
+    "precio": "€2.50",
+    "imagen": "IMG/IMG_3580.jpg",
+    "reverso": "IMG/IMG_3593.jpg"
+  }
+]
