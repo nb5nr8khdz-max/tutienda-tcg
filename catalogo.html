@@ -34,6 +34,16 @@
             <a href="carta.html?id=${carta.id}" class="btn">Ver carta</a>
           `;
           catalogo.appendChild(item);
+            // BUSCADOR
+      const buscarInput = document.getElementById('buscar');
+
+      buscarInput.addEventListener('input', () => {
+        const texto = buscarInput.value.toLowerCase();
+
+        const cartas = document.querySelectorAll('.carta');
+        cartas.forEach(c => {
+          const nombre = c.querySelector('h2').textContent.toLowerCase();
+          c.style.display = nombre.includes(texto) ? 'block' : 'none';
         });
       });
   </script>
