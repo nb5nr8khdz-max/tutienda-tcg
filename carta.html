@@ -21,6 +21,21 @@
     fetch('inventario.json')
       .then(response => response.json())
       .then(data => {
+      const botonCarrito = document.getElementById('agregarCarrito');
+
+      botonCarrito.addEventListener('click', () => {
+        let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+        carrito.push({
+          id: carta.id,
+          nombre: carta.nombre,
+          precio: carta.precio,
+          imagen: carta.imagen
+        });
+
+        localStorage.setItem('carrito', JSON.stringify(carrito));
+        alert("Carta agregada al carrito");
+      });
 
         // Comparación segura
         const carta = data.find(c => String(c.id) === String(id));
